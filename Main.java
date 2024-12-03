@@ -10,7 +10,7 @@ public class Main {
 		return size;
 	}
 	public static void setSize(int size) {
-		Puzzle.size = size;
+		Main.size = size;
 	}
 
     public static void main(String[] args) {
@@ -64,33 +64,5 @@ public class Main {
 			}
 		}
 		return true;
-    }
-
-    public static int getFieldIndex(int [][] board, int number){
-        int [] index = new int [2];
-
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == number){
-                    index[0] = i;
-                    index[1] = j;
-                }
-            }
-        }
-        return index;
-    }
-
-    public static int [] getEmptyFieldIndex(int [][] board){
-        int [] index = new int [2];
-
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == 0){
-                    index[0] = i;
-                    index[1] = j;
-                }
-            }
-        }
-        return index;
     }
 }
