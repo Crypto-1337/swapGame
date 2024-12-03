@@ -18,6 +18,8 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		int move;
 		
+		int moves = 0;
+		
 		createPuzzle(3);
         
 		mixPuzzle(60);
@@ -32,8 +34,16 @@ public class Main {
 			move = scan.nextInt();
 			
 			swapFields(move);
+			
+			moves++;
+			
+			System.out.print("Zuege: ");
+			System.out.print(moves);
+			System.out.println("");
 		}
 		printPuzzle();
+		System.out.print("Du hast so viele Zuege gebraucht: ");
+		System.out.print(moves);
     }
 
 	public static void createPuzzle(int size) {
