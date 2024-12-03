@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
 		createPuzzle(3);
-		
+        
 		mixPuzzle(60);
         
 		System.out.println("OK, es kann losgehen!");
@@ -96,15 +96,57 @@ public class Main {
 	}
 
 
-    public static void swapFields(int [][] board, int number){
+    public static void swapFields(char move){
+		int tmp;
+		switch (move){
+			case 'w':
+				if (y < 1) 
+					break;
+				tmp = puzzle[y][x];
+				puzzle[y][x] = puzzle[y-1][x];
+				puzzle[y-1][x] = tmp;
+				y--;
+				break;
 
+			case 'd':
+				if (x > 1)
+					break;
+				tmp = puzzle[y][x];
+				puzzle[y][x] = puzzle[y][x+1];
+				puzzle[y][x+1] = tmp;
+				x++;
+				break;
+			
+			case 's':
+				if (y > 1) 
+					break;
+				tmp = puzzle[y][x];
+				puzzle[y][x] = puzzle[y+1][x];
+				puzzle[y+1][x] = tmp;
+				y++;
+				break;
+
+			case 'a':
+				if (x < 1)
+					break;
+				tmp = puzzle[y][x];
+				puzzle[y][x] = puzzle[y][x-1];
+				puzzle[y][x-1] = tmp;
+				x--;
+				break;
+
+			default:
+				break;
+		}
     }
 
     public static boolean isGameOver(int [][] board){
-        for(int i = 0; i < board.length; i++){
-			for(int j=0; j < board[i].length; j++){
-				if (board[i][j] == board.length + 1) continue;
-                else return false;
+        for(int i=0; i<size; i++){
+			for(int j=0; j<size; j++){
+				if(puzzle[j][i] == 0) 
+					continue;
+				if(puzzle[j][i] != 1 + j*size + i) 
+					return false;
 			}
 		}
 		return true;
