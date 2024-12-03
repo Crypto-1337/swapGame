@@ -113,7 +113,7 @@ public class Main {
 		int tmp;
 		switch (move){
 			case 'w':
-				if (y < 1) 
+				if (y < 1)
 					break;
 				tmp = puzzle[y][x];
 				puzzle[y][x] = puzzle[y-1][x];
@@ -153,15 +153,16 @@ public class Main {
 		}
     }
 
-    public static boolean isGameOver(int [][] board){
+    public static void isGameOver(int [][] board){
         for(int i=0; i<size; i++){
 			for(int j=0; j<size; j++){
 				if(puzzle[j][i] == 0) 
 					continue;
 				if(puzzle[j][i] != 1 + j*size + i) 
-					return false;
+					success = false;;
 			}
 		}
-		return true;
+		System.out.println("Sie haben gewonnen");
+		success = true;;
     }
 }
