@@ -25,6 +25,7 @@ public class Main {
             }
 
             System.out.println("Herzlichen Glückwunsch! Sie haben das Puzzle gelöst.");
+			board.printBoard();
             System.out.println("Anzahl der Züge: " + moves);
             playAgain = player.playAgain(); // Nach erneutem Spiel fragen
         } while (playAgain);
