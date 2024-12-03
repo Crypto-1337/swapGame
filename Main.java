@@ -13,14 +13,14 @@ public class Main {
 		Puzzle.size = size;
 	}
 
-	public static void main(String[] args) {   
+    public static void main(String[] args) {
 		createPuzzle(3);
         
 		System.out.println("OK, es kann losgehen!");
 
 		printPuzzle();
-	}
-    
+    }
+
 	public static void createPuzzle(int size) {
 		setSize(size);
 		puzzle = new int[size][size];
@@ -50,4 +50,47 @@ public class Main {
 		}
 		System.out.println();
 	}
+
+
+    public static void swapFields(int [][] board, int number){
+
+    }
+
+    public static boolean isGameOver(int [][] board){
+        for(int i = 0; i < board.length; i++){
+			for(int j=0; j < board[i].length; j++){
+				if (board[i][j] == board.length + 1) continue;
+                else return false;
+			}
+		}
+		return true;
+    }
+
+    public static int getFieldIndex(int [][] board, int number){
+        int [] index = new int [2];
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == number){
+                    index[0] = i;
+                    index[1] = j;
+                }
+            }
+        }
+        return index;
+    }
+
+    public static int [] getEmptyFieldIndex(int [][] board){
+        int [] index = new int [2];
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 0){
+                    index[0] = i;
+                    index[1] = j;
+                }
+            }
+        }
+        return index;
+    }
 }
