@@ -22,13 +22,11 @@ public class Main {
 	
 	public static void startGame() {
 		Scanner scan = new Scanner(System.in);
-		int move;
+		int number;
 		
 		int moves = 0; //Spielzüge
 		
 		createPuzzle(3);
-		
-		puzzleSolved = puzzle;
         
 		mixPuzzle(60);
         
