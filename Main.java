@@ -1,9 +1,9 @@
 import java.util.Scanner;
-
+import java.util.Arrays;
 
 public class Main {
-
 	static int[][] puzzle;	// Spielfeld
+	static int[][] puzzleSolved;
 	static int size, x, y, xFilled, yFilled;	// Groesse des Spielfeldes (size x size), x,y-Koordinaten der freien Stelle, xFilled,yFilled-Koordinaten der eingegebenen Zahl
 	static boolean success = false; 
  	
@@ -21,6 +21,8 @@ public class Main {
 		int moves = 0;
 		
 		createPuzzle(3);
+		
+		puzzleSolved = puzzle;
         
 		mixPuzzle(60);
         
@@ -40,6 +42,8 @@ public class Main {
 			System.out.print("Zuege: ");
 			System.out.print(moves);
 			System.out.println("");
+			
+			isGameOver();
 		}
 		printPuzzle();
 		System.out.print("Du hast so viele Zuege gebraucht: ");
@@ -159,17 +163,11 @@ public class Main {
 		}
     }
 
-    public static void isGameOver(int [][] board){
-        for(int i=0; i<size; i++){
-			for(int j=0; j<size; j++){
-				if(puzzle[j][i] == 0) 
-					continue;
-				if(puzzle[j][i] != 1 + j*size + i) 
-					success = false;;
-			}
-		}
-		System.out.println("Sie haben gewonnen");
-		success = true;;
+    public static void isGameOver(){
+        if(Arrays.equals(puzzle, puzzleSolved)) {
+			System.out.println("Sie haben gewonnen");
+			success = true;
+		}	
     }
 
 	public static void getFieldIndex(int number){
