@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class Main {
 	static int[][] puzzle;	// Spielfeld
-	static int[][] puzzleSolved;
+	static boolean continueGame = true;
 	static int size, x, y, xFilled, yFilled;	// Groesse des Spielfeldes (size x size), x,y-Koordinaten der freien Stelle, xFilled,yFilled-Koordinaten der eingegebenen Zahl
  	
 	public static int getSize() {
@@ -14,16 +14,23 @@ public class Main {
 	}
 
     public static void main(String[] args) {
+		
+		while (continueGame) {
+			startGame();			
+		}
+    }
+	
+	public static void startGame() {
 		Scanner scan = new Scanner(System.in);
-		int number; //die zu tauschende Zahl
+		int move;
 		
 		int moves = 0; //Spielzüge
 		
-		createPuzzle(3); //das zweidimensionale Array sortiert erstellen
+		createPuzzle(3);
 		
 		puzzleSolved = puzzle;
         
-		mixPuzzle(60); //Array mit n zügen mischen
+		mixPuzzle(60);
         
 		System.out.println("OK, es kann losgehen!");
 
@@ -46,10 +53,20 @@ public class Main {
 			System.out.print(moves);
 			System.out.println("");
 		}
+		
 		printPuzzle();
+		
 		System.out.print("Du hast so viele Zuege gebraucht: ");
 		System.out.print(moves);
-    }
+		System.out.println("");
+		
+		System.out.print("Willst du nochmal Spielen? (y/n): ");
+		if(scan.next().charAt(0) == "y".charAt(0)) {
+			continueGame = true;			
+		} else {
+			continueGame = false;
+		}
+	}
 
 	public static void createPuzzle(int size) {
 		setSize(size);
