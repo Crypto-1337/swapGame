@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
 
 	static int[][] puzzle;	// Spielfeld
-	static int size, x, y;	// Groesse des Spielfeldes (size x size), x,y-Koordinaten der freien Stelle
+	static int size, x, y, xFilled, yFilled;	// Groesse des Spielfeldes (size x size), x,y-Koordinaten der freien Stelle
 	static boolean success = false;
  	
 	public static int getSize() {
@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		char move;
+		int move;
 		
 		createPuzzle(3);
         
@@ -27,9 +27,9 @@ public class Main {
 		while(!success){
 			printPuzzle();
 			
-			System.out.println("Bitte geben sie den naechsten Move an(w,a,s,d): ");
+			System.out.println("Bitte geben sie die zu tauschende Zahl ein: ");
 			
-			move = scan.next().charAt(0);
+			move = scan.nextInt();
 			
 			swapFields(move);
 		}
@@ -109,47 +109,35 @@ public class Main {
 	}
 
 
-    public static void swapFields(char move){
+    public static void swapFields(int number){
 		int tmp;
-		switch (move){
-			case 'w':
-				if (y < 1)
-					break;
-				tmp = puzzle[y][x];
-				puzzle[y][x] = puzzle[y-1][x];
-				puzzle[y-1][x] = tmp;
-				y--;
-				break;
+		getFieldIndex(number);
+		if (y > yFilled){
+			tmp = puzzle[y][x];
+			puzzle[y][x] = puzzle[y-1][x];
+			puzzle[y-1][x] = tmp;
+			y--;
+		}
 
-			case 'd':
-				if (x > 1)
-					break;
-				tmp = puzzle[y][x];
-				puzzle[y][x] = puzzle[y][x+1];
-				puzzle[y][x+1] = tmp;
-				x++;
-				break;
-			
-			case 's':
-				if (y > 1) 
-					break;
-				tmp = puzzle[y][x];
-				puzzle[y][x] = puzzle[y+1][x];
-				puzzle[y+1][x] = tmp;
-				y++;
-				break;
+		else if (x < xFilled){
+			tmp = puzzle[y][x];
+			puzzle[y][x] = puzzle[y][x+1];
+			puzzle[y][x+1] = tmp;
+			x++;
+		}
 
-			case 'a':
-				if (x < 1)
-					break;
-				tmp = puzzle[y][x];
-				puzzle[y][x] = puzzle[y][x-1];
-				puzzle[y][x-1] = tmp;
-				x--;
-				break;
+		else if (y < yFilled){
+			tmp = puzzle[y][x];
+			puzzle[y][x] = puzzle[y+1][x];
+			puzzle[y+1][x] = tmp;
+			y++;
+		}	
 
-			default:
-				break;
+		else if (x > xFilled){
+			tmp = puzzle[y][x];
+			puzzle[y][x] = puzzle[y][x-1];
+			puzzle[y][x-1] = tmp;
+			x--;
 		}
     }
 
@@ -165,4 +153,15 @@ public class Main {
 		System.out.println("Sie haben gewonnen");
 		success = true;;
     }
+
+	public static void getFieldIndex(int number){
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < puzzle[i].length; j++) {
+				if (puzzle[i][j] == number){
+					yFilled = i;
+					xFilled = j;
+				}
+			}
+		}
+	}
 }
