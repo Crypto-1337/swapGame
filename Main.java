@@ -5,7 +5,8 @@ public class Main {
 
 	static int[][] puzzle;	// Spielfeld
 	static int size, x, y;	// Groesse des Spielfeldes (size x size), x,y-Koordinaten der freien Stelle
-	
+	static boolean success = false;
+ 	
 	public static int getSize() {
 		return size;
 	}
@@ -14,12 +15,24 @@ public class Main {
 	}
 
     public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		char move;
+		
 		createPuzzle(3);
         
 		mixPuzzle(60);
         
 		System.out.println("OK, es kann losgehen!");
 
+		while(!success){
+			printPuzzle();
+			
+			System.out.println("Bitte geben sie den naechsten Move an(w,a,s,d): ");
+			
+			move = scan.next().charAt(0);
+			
+			swapFields(move);
+		}
 		printPuzzle();
     }
 
