@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Main {
 
 	static int[][] puzzle;	// Spielfeld
-	static int size, x, y, xFilled, yFilled;	// Groesse des Spielfeldes (size x size), x,y-Koordinaten der freien Stelle
-	static boolean success = false;
+	static int size, x, y, xFilled, yFilled;	// Groesse des Spielfeldes (size x size), x,y-Koordinaten der freien Stelle, xFilled,yFilled-Koordinaten der eingegebenen Zahl
+	static boolean success = false; 
  	
 	public static int getSize() {
 		return size;
@@ -122,32 +122,39 @@ public class Main {
     public static void swapFields(int number){
 		int tmp;
 		getFieldIndex(number);
-		if (y > yFilled){
+		//wenn die Zahl über dem leeren Feld steht
+		if (y > yFilled && x == xFilled){
 			tmp = puzzle[y][x];
 			puzzle[y][x] = puzzle[y-1][x];
 			puzzle[y-1][x] = tmp;
 			y--;
 		}
 
-		else if (x < xFilled){
+		//wenn die Zahl rechts von dem leeren Feld steht
+		else if (x < xFilled && y == yFilled){
 			tmp = puzzle[y][x];
 			puzzle[y][x] = puzzle[y][x+1];
 			puzzle[y][x+1] = tmp;
 			x++;
 		}
 
-		else if (y < yFilled){
+		//wenn die Zahl unter dem leeren
+		else if (y < yFilled && x == xFilled){
 			tmp = puzzle[y][x];
 			puzzle[y][x] = puzzle[y+1][x];
 			puzzle[y+1][x] = tmp;
 			y++;
 		}	
 
-		else if (x > xFilled){
+		else if (x > xFilled && y == yFilled){
 			tmp = puzzle[y][x];
 			puzzle[y][x] = puzzle[y][x-1];
 			puzzle[y][x-1] = tmp;
 			x--;
+		}
+
+		else{
+			System.out.println("Das war ein ungültiger Spielzug");
 		}
     }
 
