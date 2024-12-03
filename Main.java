@@ -5,7 +5,6 @@ public class Main {
 	static int[][] puzzle;	// Spielfeld
 	static int[][] puzzleSolved;
 	static int size, x, y, xFilled, yFilled;	// Groesse des Spielfeldes (size x size), x,y-Koordinaten der freien Stelle, xFilled,yFilled-Koordinaten der eingegebenen Zahl
-	static boolean success = false; 
  	
 	public static int getSize() {
 		return size;
@@ -28,7 +27,7 @@ public class Main {
         
 		System.out.println("OK, es kann losgehen!");
 
-		while(!success){
+		while(!isGameOver()){
 			printPuzzle();
 			
 			System.out.print("Bitte geben sie die zu tauschende Zahl ein: ");
@@ -42,8 +41,6 @@ public class Main {
 			System.out.print("Zuege: ");
 			System.out.print(moves);
 			System.out.println("");
-			
-			isGameOver();
 		}
 		printPuzzle();
 		System.out.print("Du hast so viele Zuege gebraucht: ");
@@ -163,12 +160,16 @@ public class Main {
 		}
     }
 
-    public static void isGameOver(){
-        if(Arrays.equals(puzzle, puzzleSolved)) {
-			System.out.println("Sie haben gewonnen");
-			success = true;
-		}	
-    }
+	public static boolean isGameOver(){
+		for(int i=0; i<size; i++){
+			for(int j=0; j<size; j++){
+				if(puzzle[j][i] == 0) continue;
+				if(puzzle[j][i] != 1 + j*size + i) return false;
+			}
+		}
+		System.out.println("Sie haben gewonnen.");
+		return true;
+	}
 
 	public static void getFieldIndex(int number){
 		for (int i = 0; i < size; i++) {
