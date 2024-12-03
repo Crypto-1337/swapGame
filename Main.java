@@ -15,6 +15,8 @@ public class Main {
 
     public static void main(String[] args) {
 		createPuzzle(3);
+		
+		mixPuzzle(60);
         
 		System.out.println("OK, es kann losgehen!");
 
@@ -34,6 +36,48 @@ public class Main {
 		puzzle[x][y] = 0;
 	}
     
+	public static void mixPuzzle(int n) {
+		int tmp;
+		
+		for(int i = 0; i <= n; i++){
+			switch((int)Math.floor(Math.random()*4)){
+				case 0:{
+					if(y < 1) break;
+					tmp = puzzle[y][x];
+					puzzle[y][x] = puzzle[y-1][x];
+					puzzle[y-1][x] = tmp;
+					y--;
+					break;
+
+				}
+				case 1:{
+					if(x < 1) break;
+					tmp = puzzle[y][x];
+					puzzle[y][x] = puzzle[y][x-1];
+					puzzle[y][x-1] = tmp;
+					x--;
+					break;
+				}
+				case 2:{
+					if(y > 1) break;
+					tmp = puzzle[y][x];
+					puzzle[y][x] = puzzle[y+1][x];
+					puzzle[y+1][x] = tmp;
+					y++;
+					break;
+				}
+				case 3:{
+					if(x > 1) break;
+					tmp = puzzle[y][x];
+					puzzle[y][x] = puzzle[y][x+1];
+					puzzle[y][x+1] = tmp;
+					x++;
+					break;
+				}
+			}
+		}
+	}
+	
 	public static void printPuzzle() {
 		if(puzzle == null){
 			System.out.println("Spielfeld kann nicht ausgegeben werden, es wurde noch nicht erstellt!");
