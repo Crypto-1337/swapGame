@@ -29,10 +29,10 @@ public class Main {
 		while(!success){
 			printPuzzle();
 			
-			System.out.println("Bitte geben sie die zu tauschende Zahl ein: ");
-			
+			System.out.print("Bitte geben sie die zu tauschende Zahl ein: ");
 			move = scan.nextInt();
-			
+			System.out.println("");
+						
 			swapFields(move);
 			
 			moves++;
@@ -110,10 +110,11 @@ public class Main {
 		for(int i=0; i<size; i++){
 			for(int j=0; j<size; j++){
 				str = puzzle[i][j]+" ";
-				if(puzzle[i][j] < 10) str = " "+str;
+				if(puzzle[i][j] < 10) str = "| "+ str;
+				if(puzzle[i][j] == 0) str = "| " + "  ";
 				System.out.print(str);
 			}
-			System.out.println();
+			System.out.println("| ");
 		}
 		System.out.println();
 	}
